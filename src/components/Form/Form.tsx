@@ -48,6 +48,7 @@ export default function CustomForm({
           id="outlined-basic"
           label="Name"
           variant="outlined"
+          placeholder="John Doe"
           value={formik.values.name}
           onChange={formik.handleChange}
           error={formik.touched.name && Boolean(formik.errors.name)}
@@ -59,6 +60,7 @@ export default function CustomForm({
           id="outlined-basic"
           label="Email"
           variant="outlined"
+          placeholder="test@test.com"
           value={formik.values.email}
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
@@ -70,6 +72,7 @@ export default function CustomForm({
           id="outlined-basic"
           label="Phone number"
           variant="outlined"
+          placeholder="+3816(X)-XXX-XXX"
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           error={
@@ -87,6 +90,7 @@ export default function CustomForm({
           variant="outlined"
           value={formik.values.dateOfEmployment}
           onChange={formik.handleChange}
+          placeholder="YYYY-MM-DD"
           error={
             formik.touched.dateOfEmployment &&
             Boolean(formik.errors.dateOfEmployment)
@@ -106,6 +110,7 @@ export default function CustomForm({
           error={
             formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
           }
+          placeholder="YYYY-MM-DD"
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
           name="dateOfBirth"
           size="small"
@@ -114,6 +119,7 @@ export default function CustomForm({
           id="outlined-basic"
           label="City"
           variant="outlined"
+          placeholder="London"
           value={formik.values.city}
           onChange={formik.handleChange}
           error={formik.touched.city && Boolean(formik.errors.city)}
@@ -126,6 +132,7 @@ export default function CustomForm({
         <TextField
           id="outlined-basic"
           label="ZIP Code"
+          placeholder="21000"
           variant="outlined"
           value={formik.values.ZIPCode}
           onChange={formik.handleChange}
@@ -138,6 +145,7 @@ export default function CustomForm({
           id="outlined-basic"
           label="Address Line 1"
           variant="outlined"
+          placeholder="Royal Mile 3"
           value={formik.values.addressLine1}
           onChange={formik.handleChange}
           error={
@@ -151,6 +159,7 @@ export default function CustomForm({
           id="outlined-basic"
           label="Address line 2"
           variant="outlined"
+          placeholder="Royal Mile 5"
           value={formik.values.addressLine2}
           onChange={formik.handleChange}
           error={
