@@ -1,15 +1,12 @@
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import AddEmployee from "./features/addEmployee/AddEmployee";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
+import AddEmployee from "./pages/addEmployee";
+import AllEmployees from "./pages/allEmployees";
+import UpdateEmployee from "./pages/updateEmployee";
 
 const queryClient = new QueryClient();
 
@@ -22,9 +19,12 @@ function App() {
           <Box sx={{ my: 4 }}>
             <section className="main">
               <Routes>
-                <Route path="/" element={<Navigate to="/add-employee" />} />
+                <Route path="/" element={<AllEmployees />} />
                 <Route path="/add-employee" element={<AddEmployee />} />
-                <Route path="/update-employee" element={<AddEmployee />} />
+                <Route
+                  path="/update-employee/:id"
+                  element={<UpdateEmployee />}
+                />
               </Routes>
             </section>
           </Box>

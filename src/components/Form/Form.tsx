@@ -1,33 +1,32 @@
 import { Box, Button, TextField } from "@mui/material";
-import { FormikHelpers, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
-import { IEmployee } from "../../shared/types";
 
-type Props = {
-  action: (o: IEmployee) => void;
+export type IInitialValues = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  dateOfEmployment: string;
+  dateOfBirth: string;
+  city: string;
+  ZIPCode: string;
+  addressLine1: string;
+  addressLine2: string;
 };
 
-export default function CustomForm({ action }: Props) {
-  const onSubmit = (
-    values: typeof initialValues,
-    onSubmitProps: FormikHelpers<typeof initialValues>
-  ) => {
-    let homeAddress = {
-      city: values.city,
-      ZIPCode: values.ZIPCode,
-      addressLine1: values.addressLine1,
-      addressLine2: values.addressLine2,
-    };
-    let employee = {
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
-      homeAddress,
-      dateOfBirth: values.dateOfBirth,
-      dateOfEmployment: values.dateOfEmployment,
-    };
-    action(employee);
-    onSubmitProps.resetForm();
+type Props = {
+  action: (values: IInitialValues) => void;
+  isLoading: boolean;
+  initialValues?: IInitialValues;
+};
+
+export default function CustomForm({
+  action,
+  isLoading,
+  initialValues = emptyInitialValues,
+}: Props) {
+  const onSubmit = (values: IInitialValues) => {
+    action(values);
   };
 
   const formik = useFormik({
@@ -162,7 +161,12 @@ export default function CustomForm({ action }: Props) {
           size="small"
         />
       </div>
-      <Button color="primary" variant="contained" type="submit">
+      <Button
+        disabled={isLoading}
+        color="primary"
+        variant="contained"
+        type="submit"
+      >
         Submit
       </Button>
     </Box>
@@ -184,7 +188,7 @@ const validationSchema = yup.object({
   addressLine2: yup.string().required("Address 2 is required"),
 });
 
-const initialValues = {
+const emptyInitialValues = {
   name: "",
   email: "",
   phoneNumber: "",

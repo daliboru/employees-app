@@ -1,4 +1,4 @@
-export interface IEmployee {
+export interface IEmployeeInput {
   name: string;
   email: string;
   phoneNumber: string;
@@ -10,4 +10,14 @@ export interface IEmployee {
     addressLine1: string;
     addressLine2: string;
   };
+}
+
+export interface IEmployee extends IEmployeeInput {
+  _id: string;
+}
+
+export interface ResponseError {
+  statusCode: number;
+  message: string[];
+  error: string;
 }
