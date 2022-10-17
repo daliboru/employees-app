@@ -6,6 +6,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import AddEmployee from "./pages/addEmployee";
 import AllEmployees from "./pages/allEmployees";
+import DeletedEmployees from "./pages/deletedEmployees";
 import UpdateEmployee from "./pages/updateEmployee";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,10 @@ function App() {
                 <Route
                   path="/update-employee/:id"
                   element={<UpdateEmployee />}
+                />
+                <Route
+                  path="/deleted-employees"
+                  element={<DeletedEmployees />}
                 />
               </Routes>
             </section>

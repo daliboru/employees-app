@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, List, ListItem, ListItemText } from "@mui/material";
 import CustomForm from "../../components/Form";
 import { IInitialValues } from "../../components/Form/Form";
 import useCreateEmployee from "./hooks/useCreateEmployee";
@@ -7,20 +7,7 @@ export default function AddEmployee() {
   const { isCreating, createMutation, createError } = useCreateEmployee();
 
   const onSubmit = (values: IInitialValues) => {
-    let homeAddress = {
-      city: values.city,
-      ZIPCode: values.ZIPCode,
-      addressLine1: values.addressLine1,
-      addressLine2: values.addressLine2,
-    };
-    let employee = {
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
-      homeAddress,
-      dateOfBirth: values.dateOfBirth,
-      dateOfEmployment: values.dateOfEmployment,
-    };
+    const employee = formatEmployee(values);
     createMutation(employee);
   };
 
@@ -36,14 +23,34 @@ export default function AddEmployee() {
         </Typography>
       )}
       {createError && (
-        <ul>
+        <List>
           {createError.message.map((msg, i) => (
-            <Typography key={i} variant="body1" gutterBottom>
-              {msg}
-            </Typography>
+            <ListItem key={i}>
+              <Typography variant="body1" color={"red"}>
+                {msg}
+              </Typography>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
     </>
   );
 }
+
+const formatEmployee = (values: IInitialValues) => {
+  let homeAddress = {
+    city: values.city,
+    ZIPCode: values.ZIPCode,
+    addressLine1: values.addressLine1,
+    addressLine2: values.addressLine2,
+  };
+  let employee = {
+    name: values.name,
+    email: values.email,
+    phoneNumber: values.phoneNumber,
+    homeAddress,
+    dateOfBirth: values.dateOfBirth,
+    dateOfEmployment: values.dateOfEmployment,
+  };
+  return employee;
+};

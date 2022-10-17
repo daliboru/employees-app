@@ -1,20 +1,30 @@
 import axios from "axios";
 import { IEmployee, IEmployeeInput } from "../shared/types";
 
+export const PER_PAGE_LIMIT = 1;
+
 const apiClient = axios.create({
   baseURL: "http://142.132.229.249:3000/",
 });
 
-const findAll = async () => {
+const findAll = async (page: number) => {
   const { data } = await apiClient.get<{
     employees: IEmployee[];
     count: number;
-  }>("/employees");
+  }>(`/employees?page=${page}&limit=${PER_PAGE_LIMIT}`);
   return data;
 };
 
 const findOne = async (id: string) => {
   const { data } = await apiClient.get<IEmployee>(`/employees/id/${id}`);
+  return data;
+};
+
+const findDeleted = async () => {
+  const { data } = await apiClient.get<{
+    employees: IEmployee[];
+    count: number;
+  }>(`/employees/deleted`);
   return data;
 };
 
@@ -40,6 +50,7 @@ const EmployeeService = {
   update,
   findOne,
   deleteOne,
+  findDeleted,
 };
 
 export default EmployeeService;
